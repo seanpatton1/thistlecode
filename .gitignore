@@ -1,0 +1,5 @@
+# The three design directions built to choose between. They did their job
+# and are kept locally for reference, but GitHub Pages publishes whatever
+# is in the repo, and a live site should not be serving three rejected
+# alternatives alongside the real one.
+designs/

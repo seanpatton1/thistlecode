@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Thistle Code</title>
+<meta name="description" content="Everything Sean Patton has built and shipped: Assay, a TradingView indicator, offline-first web apps, and a game in progress. Status stated plainly, including what isn't finished.">
+<meta name="theme-color" content="#090b0e">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path class="b-bracket" d="M9.5 6 L4.5 16 L9.5 26" fill="none" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="b-bracket" d="M22.5 6 L27.5 16 L22.5 26" fill="none" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="b-thistle" d="M13.2 10.5 L16 7 L18.8 10.5" fill="none"
+              stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+        <ellipse class="b-thistle" cx="16" cy="14.4" rx="3.6" ry="3.1" stroke="none"/>
+        <path class="b-thistle" d="M16 17.8 L16 24.5" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      thistle<span class="sep">·</span>code
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <span class="status"><span class="dot"></span>online</span>
+  </div>
+</header>
+
+<main>
+
+<div class="page-head">
+  <div class="wrap">
+    <p class="label">Work</p>
+    <h1>Everything, with its actual state.</h1>
+    <p>
+      Including the parts that are unfinished. A portfolio that only shows
+      finished things tells you nothing about how someone works &mdash; and
+      most of what is interesting happens before the finish.
+    </p>
+  </div>
+</div>
+
+<section id="trading">
+  <div class="wrap">
+    <p class="label reveal">Trading tools</p>
+    <div class="rows reveal">
+
+      <div class="row">
+        <div class="row-main">
+          <h3>Assay</h3>
+          <p>
+            Backtest verification for TradingView strategy builders. Upload a
+            <span class="mono">List of Trades</span> export and get a letter grade with
+            the reasoning: is the sample big enough to conclude anything, does the win
+            rate clear what the reward-to-risk demands, was the worst losing run worse
+            than chance predicts, and at what spread does the edge disappear. Free, no
+            account, and the file you upload is never stored.
+          </p>
+          <a class="go" href="https://assaytrade.com">assaytrade.com &rarr;</a>
+        </div>
+        <div class="row-meta">Django &middot; SQLite</div>
+        <div><span class="tag t-live">Live</span></div>
+      </div>
+
+      <div class="row">
+        <div class="row-main">
+          <h3>Edge Reality Check</h3>
+          <p>
+            A published TradingView indicator. From every bar it asks whether price
+            travelled the target distance before the stop distance, and counts the
+            answers &mdash; giving the hit rate random entry would have produced at a
+            given reward-to-risk. That is the number any entry signal has to beat, and
+            almost nobody knows theirs.
+          </p>
+          <a class="go" href="https://www.tradingview.com/u/ThistleCode/#published-scripts">TradingView &rarr;</a>
+        </div>
+        <div class="row-meta">Pine Script v6</div>
+        <div><span class="tag t-live">Published</span></div>
+      </div>
+
+      <div class="row">
+        <div class="row-main">
+          <h3>Pine Script, coded and honestly backtested</h3>
+          <p>
+            Your strategy built in Pine Script v6 &mdash; no repainting, no lookahead,
+            clean and commented &mdash; and then a straight answer on whether it holds
+            up. Most developers code what you describe and hand it back; a strategy that
+            looks good and isn&rsquo;t costs far more than the build ever did.
+          </p>
+          <a class="go" href="https://www.fiverr.com/thistlecode">See the packages &rarr;</a>
+        </div>
+        <div class="row-meta">from $40</div>
+        <div><span class="tag t-hire">For hire</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="apps">
+  <div class="wrap">
+    <p class="label reveal">Personal tools</p>
+    <p class="reveal" style="color:var(--muted);max-width:62ch;margin-top:-8px">
+      These are not products and none of them is for sale. I built them for myself,
+      I use them every day, and they are here because what someone builds when
+      nobody is paying tells you more about how they work than a client project does.
+    </p>
+    <p class="reveal" style="color:var(--muted);max-width:62ch">
+      All three share the same shape: installable to a phone, working offline, no
+      account, no server, and the data exports to a file you keep.
+    </p>
+    <div class="cards reveal" style="margin-top:24px">
+      <div class="card">
+        <h3>Budget <span class="tag">Personal</span></h3>
+        <p>Household budgeting, built because the app we were paying for did less
+           than a spreadsheet and charged monthly for the privilege.</p>
+      </div>
+      <div class="card">
+        <h3>Week Planner <span class="tag">Personal</span></h3>
+        <p>Hour-by-hour planning for the week ahead. Lives on my phone home screen
+           and syncs through a file rather than someone else&rsquo;s account.</p>
+      </div>
+      <div class="card">
+        <h3>Trading Journal <span class="tag">Personal</span></h3>
+        <p>Where my own strategies get recorded and reviewed. It is the tool that
+           turned up a trade that never happened, and the reason I trust an export
+           less than I used to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="games">
+  <div class="wrap">
+    <p class="label reveal">Games</p>
+    <div class="rows reveal">
+      <div class="row">
+        <div class="row-main">
+          <h3>Untitled sci-fi RPG</h3>
+          <p>
+            2D pixel-art, built in Godot 4. Currently a vertical slice rather than a
+            game: one station, one rescue, enough systems to prove the loop is worth
+            building out. I&rsquo;ll write it up as it goes, including the parts that
+            turn out to be wrong.
+          </p>
+        </div>
+        <div class="row-meta">Godot 4 &middot; GDScript</div>
+        <div><span class="tag t-wip">Building</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="reveal" style="font-size:22px;margin-bottom:14px">Something you want built?</h2>
+    <p class="reveal" style="color:var(--muted);max-width:60ch">
+      The trading work is the most public, but it isn&rsquo;t the limit of it.
+    </p>
+    <p class="reveal" style="margin-top:18px">
+      <a class="btn btn-primary" href="contact.html">Get in touch</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>thistle&middot;code &mdash; Sean Patton, Scotland</span>
+    <span class="addr">&copy; 2026</span>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+</body>
+</html>

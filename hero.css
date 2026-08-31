@@ -1,0 +1,125 @@
+/* ===================================================================
+   Landing page only.
+
+   The hero draws a signal line across the screen and boots a short
+   readout above the headline. It is the one place on the site allowed
+   to be a performance, because it is the only page whose job is to make
+   someone want to keep going.
+   =================================================================== */
+
+.hero{
+  position:relative;
+  padding:88px 0 64px;
+  border-top:0;
+  overflow:hidden;
+}
+
+/* The plotted line behind the headline. Drawn, not decorative: it is a
+   real polyline with pathLength normalised, the same trick Assay's
+   equity curve uses, so one rule draws it regardless of its shape. */
+.hero-plot{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  opacity:.55;
+}
+.hero-line{
+  fill:none;
+  stroke:var(--thistle);
+  stroke-width:1.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:1;
+  stroke-dashoffset:1;
+  animation:draw 2.6s var(--ease) .35s forwards;
+  filter:drop-shadow(0 0 7px rgba(169,139,240,.45));
+}
+.hero-area{fill:url(#plotFade);opacity:0;animation:fade 1.6s ease 1.9s forwards}
+.hero-glow{
+  position:absolute;top:-320px;left:50%;transform:translateX(-50%);
+  width:900px;height:620px;pointer-events:none;
+  background:radial-gradient(ellipse at center,
+    rgba(169,139,240,.13) 0%, rgba(63,216,164,.05) 45%, transparent 70%);
+}
+
+.hero .wrap{position:relative}
+
+/* --- Boot readout -------------------------------------------------- */
+
+.boot{
+  font-family:var(--mono);
+  font-size:14.5px;
+  color:var(--dim);
+  margin:0 0 26px;
+  min-height:5.4em;      /* reserved, so the headline never jumps */
+  line-height:1.8;
+}
+.boot li{list-style:none;opacity:0}
+.boot li.on{opacity:1}
+.boot ul{margin:0;padding:0}
+.boot .ok{color:var(--signal)}
+.boot .val{color:var(--muted)}
+.boot .arrow{color:var(--thistle)}
+
+.hero h1{
+  font-size:clamp(33px,5.6vw,60px);
+  letter-spacing:-.025em;
+  margin-bottom:22px;
+  max-width:19ch;
+}
+.hero h1 .accent{color:var(--thistle)}
+
+.hero-lede{
+  font-size:20px;
+  color:var(--muted);
+  max-width:56ch;
+  margin-bottom:16px;
+}
+
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+
+/* --- Strand teasers ------------------------------------------------ */
+
+.strips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
+.strip{
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--bg-2);
+  padding:24px 24px 22px;
+  position:relative;
+  overflow:hidden;
+  display:block;color:inherit;
+  transition:border-color .22s var(--ease), transform .22s var(--ease)}
+.strip:hover{border-color:var(--line-lit);transform:translateY(-3px);color:inherit}
+
+/* A light sweeps across the top edge on hover, like a scanner passing.
+   Costs one pseudo-element and is the only flourish on the card. */
+.strip::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--thistle),transparent);
+  opacity:0;transform:translateX(-100%);
+}
+.strip:hover::after{opacity:1;animation:sweep 1.1s var(--ease)}
+
+.strip .k{font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.strip h3{font-size:18px;margin-bottom:8px}
+.strip p{color:var(--muted);font-size:16px;margin:0}
+.strip .count{position:absolute;top:20px;right:22px;font-family:var(--mono);
+  font-size:13px;color:var(--dim)}
+
+@media(max-width:760px){.strips{grid-template-columns:1fr}}
+
+/* --- Quiet close --------------------------------------------------- */
+
+.close{padding:52px 0 60px;border-top:1px solid var(--line)}
+.close h2{font-size:27px;margin-bottom:16px}
+.close p{color:var(--muted);max-width:60ch}
+.close .addr{font-family:var(--mono);font-size:21px;margin-top:22px}
+
+@media(max-width:640px){
+  .hero{padding:56px 0 44px}
+  .boot{min-height:7.2em}
+}

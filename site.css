@@ -1,0 +1,290 @@
+/* ===================================================================
+   Thistle Code — design system
+
+   The idea: this site should look like an instrument. Sean's whole
+   differentiator is that he measures things and reports the result
+   including when it is unflattering, so the site performs that rather
+   than claiming it — aligned columns, status tags, live readouts.
+
+   Two accents, with a strict division of labour, borrowed from Assay's
+   rule that colour is reserved for verdicts:
+
+     --thistle  the brand. Logo, links, focus, anything interactive.
+     --signal   status only. Live, passing, on. Never decoration.
+     --amber / --alert  in-progress and failure. Never anything else.
+
+   Phosphor green on black was the obvious move and is avoided on
+   purpose: it is the single most imitated look in developer portfolios,
+   and imitating it would say the opposite of what this site is for.
+   =================================================================== */
+
+:root{
+  /* Ground. Cool and near-black, but not pure — pure black kills the
+     depth that separates panels from page. */
+  --bg:        #090b0e;
+  --bg-2:      #0d1015;
+  --bg-3:      #12161d;
+  --line:      #1b212a;
+  --line-lit:  #2a323e;
+
+  --text:      #e4e9ef;
+  --muted:     #8c98a6;
+  --dim:       #59636f;
+
+  --thistle:   #a98bf0;
+  --thistle-2: #c4aef6;
+  --signal:    #3fd8a4;
+  --amber:     #e9b45c;
+  --alert:     #ef6f60;
+
+  --mono: ui-monospace, "Cascadia Mono", "JetBrains Mono", "SF Mono",
+          Consolas, "Liberation Mono", monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+          Arial, sans-serif;
+
+  --wrap: 1120px;
+  --ease: cubic-bezier(.22,.75,.28,1);
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+[id]{scroll-margin-top:100px}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:17.5px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* A faint grid, fixed behind everything. It is the graph paper an
+   instrument draws on, and at 2% opacity it reads as texture rather
+   than decoration. */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(169,139,240,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(169,139,240,.045) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 0%, transparent 75%);
+}
+
+body > *{position:relative;z-index:1}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 26px}
+
+h1,h2,h3,h4{margin:0;font-family:var(--mono);font-weight:600;line-height:1.25;
+  letter-spacing:-.015em}
+p{margin:0 0 15px}
+.mono{font-family:var(--mono)}
+.num{font-variant-numeric:tabular-nums}
+
+a{color:var(--thistle);text-decoration:none}
+a:hover{color:var(--thistle-2)}
+
+:where(a,button,summary,[tabindex]):focus-visible{
+  outline:2px solid var(--thistle);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+::selection{background:rgba(169,139,240,.28)}
+*{scrollbar-width:thin;scrollbar-color:var(--line-lit) transparent}
+
+/* --- Top bar ------------------------------------------------------ */
+
+.bar{
+  position:sticky;top:0;z-index:40;
+  background:rgba(9,11,14,.86);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.bar .wrap{display:flex;align-items:center;gap:16px;padding-top:16px;padding-bottom:16px}
+
+/* Heavier than the rest of the mono on the page on purpose: at this
+   size a 700-weight monospace reads thin next to the nav beside it, and
+   the wordmark is the one thing in the bar that should not. */
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--mono);
+  font-weight:800;font-size:22px;letter-spacing:.01em;color:var(--text)}
+.brand:hover{color:var(--text)}
+.brand svg{width:32px;height:32px;flex-shrink:0}
+.brand .b-bracket{stroke:var(--thistle);stroke-width:2.6}
+.brand .b-thistle{fill:var(--thistle);stroke:var(--thistle)}
+.brand .sep{color:var(--thistle)}
+
+.nav{margin-left:auto;display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:15.5px}
+.nav a{color:var(--muted);padding:7px 12px;border-radius:6px;position:relative}
+.nav a:hover{color:var(--text);background:var(--bg-2)}
+.nav a[aria-current="page"]{color:var(--text)}
+.nav a[aria-current="page"]::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:2px;height:1px;
+  background:var(--thistle);
+}
+
+.status{margin-left:14px;font-family:var(--mono);font-size:13px;color:var(--dim);
+  display:flex;align-items:center;gap:7px;white-space:nowrap}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--signal);
+  box-shadow:0 0 0 0 rgba(63,216,164,.6);animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(63,216,164,.5)}
+  70%{box-shadow:0 0 0 7px rgba(63,216,164,0)}
+  100%{box-shadow:0 0 0 0 rgba(63,216,164,0)}
+}
+
+/* --- Page furniture ----------------------------------------------- */
+
+.label{font-family:var(--mono);font-size:13px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--dim);margin:0 0 22px}
+
+.page-head{padding:66px 0 34px}
+.page-head h1{font-size:clamp(32px,5vw,50px);margin-bottom:18px}
+.page-head p{color:var(--muted);max-width:62ch;font-size:19px}
+
+section{padding:44px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+
+/* --- Buttons ------------------------------------------------------ */
+
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);
+  font-size:15px;padding:12px 21px;border:1px solid var(--line-lit);
+  border-radius:8px;color:var(--text);background:var(--bg-2);
+  transition:border-color .18s var(--ease), transform .18s var(--ease),
+             box-shadow .18s var(--ease);}
+.btn:hover{color:var(--text);border-color:var(--thistle);transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(169,139,240,.14)}
+.btn-primary{background:var(--thistle);border-color:var(--thistle);color:#140c25;
+  font-weight:700}
+.btn-primary:hover{background:var(--thistle-2);border-color:var(--thistle-2);color:#140c25}
+
+/* --- Tags --------------------------------------------------------- */
+
+.tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;
+  text-transform:uppercase;border:1px solid var(--line-lit);border-radius:4px;
+  padding:2.5px 8px;color:var(--dim);white-space:nowrap}
+.t-live{color:var(--signal);border-color:rgba(63,216,164,.38);
+  background:rgba(63,216,164,.06)}
+.t-wip{color:var(--amber);border-color:rgba(233,180,92,.38);
+  background:rgba(233,180,92,.06)}
+.t-hire{color:var(--thistle);border-color:rgba(169,139,240,.4);
+  background:rgba(169,139,240,.07)}
+
+/* --- Rows (the instrument's readout) ------------------------------- */
+
+.rows{border:1px solid var(--line);border-radius:11px;overflow:hidden;
+  background:var(--bg-2)}
+.row{display:grid;grid-template-columns:1fr auto auto;gap:18px;align-items:start;
+  padding:20px 22px;border-bottom:1px solid var(--line);
+  transition:background .18s var(--ease)}
+.row:last-child{border-bottom:0}
+.row:hover{background:var(--bg-3)}
+.row-main h3{font-size:18.5px;margin-bottom:7px}
+.row-main p{color:var(--muted);font-size:16.5px;margin:0;max-width:60ch}
+.row-main .go{display:inline-block;margin-top:12px;font-family:var(--mono);
+  font-size:14.5px}
+.row-meta{font-family:var(--mono);font-size:13.5px;color:var(--dim);
+  white-space:nowrap;padding-top:3px}
+
+@media(max-width:700px){
+  .row{grid-template-columns:1fr;gap:10px}
+  .row-meta{padding-top:0}
+}
+
+/* --- Metrics ------------------------------------------------------- */
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:11px;
+  overflow:hidden}
+.metric{background:var(--bg-2);padding:24px 22px;transition:background .2s var(--ease)}
+.metric:hover{background:var(--bg-3)}
+.metric .v{font-family:var(--mono);font-size:34px;color:var(--text);
+  font-variant-numeric:tabular-nums;line-height:1.1}
+.metric .k{font-family:var(--mono);font-size:12px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--dim);margin-top:7px}
+.metric.is-zero .v{color:var(--muted)}
+@media(max-width:640px){.metrics{grid-template-columns:repeat(2,1fr)}}
+
+.footnote{font-family:var(--mono);font-size:14px;line-height:1.65;
+  color:var(--dim);max-width:70ch;margin:18px 0 0}
+
+/* --- Cards --------------------------------------------------------- */
+
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--bg-2);
+  padding:22px 24px;display:block;color:inherit;
+  transition:border-color .2s var(--ease), transform .2s var(--ease),
+             box-shadow .2s var(--ease)}
+.card:hover{border-color:var(--line-lit);transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(0,0,0,.35);color:inherit}
+.card h3{font-size:18.5px;margin-bottom:10px;display:flex;align-items:center;
+  gap:10px;flex-wrap:wrap}
+.card p{color:var(--muted);font-size:16.5px;margin:0}
+.card .go{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:14.5px}
+@media(max-width:700px){.cards{grid-template-columns:1fr}}
+
+/* --- Footer -------------------------------------------------------- */
+
+.foot{border-top:1px solid var(--line);padding:26px 0 46px;margin-top:20px}
+.foot .wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:baseline;
+  font-family:var(--mono);font-size:13.5px;color:var(--dim)}
+.foot .addr{margin-left:auto}
+
+/* ===================================================================
+   Motion
+
+   Everything below is decoration and every rule here is switched off
+   in one block at the bottom. Nothing on this site is gated on an
+   animation: content is in the DOM and readable whether or not any of
+   it runs.
+   =================================================================== */
+
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes sweep{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(100%)}
+}
+
+/* Revealed as they enter the viewport, by site.js. Without script the
+   class is never added and .reveal never applies, so everything is
+   simply visible — which is the state below. */
+.js .reveal{opacity:0;transform:translateY(16px)}
+.js .reveal.in{opacity:1;transform:none;
+  transition:opacity .6s var(--ease), transform .6s var(--ease)}
+
+/* The escape hatch, and it is not optional.
+   Reveal-on-scroll hides content and relies on a transition to bring it
+   back. A transition only advances while the browser is producing
+   frames, and there are several ordinary reasons it might not be — a
+   background tab, low-power mode, a throttled renderer. The failure is
+   silent and total: text that is present, correct, and invisible.
+   site.js therefore sets this a few seconds in regardless of what the
+   observer did, so the worst case is content arriving without a flourish
+   rather than content nobody can read. */
+.js.reveal-all .reveal{opacity:1 !important;transform:none !important;
+  transition:none !important}
+
+.caret{display:inline-block;width:.55em;height:1.05em;background:var(--thistle);
+  vertical-align:-.16em;margin-left:.14em;animation:blink 1.15s steps(1) infinite}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .js .reveal,.js .reveal.in{opacity:1;transform:none;transition:none}
+  .dot{animation:none}
+  .caret{animation:none;opacity:1}
+  .hero-line{stroke-dashoffset:0 !important;animation:none !important}
+  .boot{display:none !important}
+  .btn:hover{transform:none}
+  .card:hover{transform:none}
+}
